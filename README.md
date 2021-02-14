@@ -1,0 +1,1 @@
+Lostdex is a platform where someone can list their lost items and if someone has found an item they can list is as found. It's a platform where you will get help to find your lost items, and by returning the found item you will be rewarded.
