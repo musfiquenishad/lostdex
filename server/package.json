@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Lostdex",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahsannishad/lostdex.git"
+  },
+  "keywords": [
+    "Lostdex"
+  ],
+  "author": "Musfique Ahsan Nishad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahsannishad/lostdex/issues"
+  },
+  "homepage": "https://github.com/ahsannishad/lostdex#readme"
+}
