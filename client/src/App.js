@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import "./Mobilestyle.css";
+import "./Tabstyle.css";
+import Home from "./Pages/Home";
+import { Fragment } from "react";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import SearchAndFilter from "./Pages/SearchAndFilter";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<Router>
+			<Switch>
+				<Route exact path="/">
+					<Home />
+				</Route>
+				<Route exact path="/search">
+					<SearchAndFilter />
+				</Route>
+			</Switch>
+		</Router>
+	);
 }
 
 export default App;

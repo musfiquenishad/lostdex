@@ -1,38 +1,159 @@
-.App {
-  text-align: center;
+/*navbar style*/
+.segment {
+	margin-top: 100px;
+}
+.bi {
+	margin-bottom: 3px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header {
+	background-color: white;
+}
+.menu-dropdown {
+	color: #545454;
+}
+.menu-dropdown:hover {
+	color: #ffc107;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/*navbar style*/
+
+/*Hero section style*/
+.hero-section {
+	margin-top: 100px;
+}
+.hero-heading {
+	font-family: "Open Sans", sans-serif;
+	color: #545454;
+	margin-top: 50px;
+	margin-left: 30px;
+	margin-bottom: 50px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.location-form {
+	padding: 15px;
+}
+.location-input {
+	height: 50px;
+}
+/*Hero section style*/
+
+/*Sub hero section style*/
+.sub-hero-section {
+	background-color: #ffc107;
+	height: 450px;
+}
+.sub-hero-heading {
+	color: white;
+	font-family: "Open Sans", sans-serif;
+	margin-top: 70px;
+	margin-bottom: 60px;
+}
+.card-title {
+	color: #545454;
+}
+.sub-hero-card {
+	width: 50%;
+	margin-left: 5%;
+}
+/*Sub hero section style*/
+
+/*features section style*/
+.features-section {
+	background-color: #f5f4f4;
+}
+.features-heading {
+	margin-top: 200px;
+	color: #545454;
+	font-family: "Open Sans", sans-serif;
+}
+.features-sub-heading {
+	color: gray;
+	width: 80%;
+	font-family: "Open Sans", sans-serif;
+}
+/*features section style*/
+
+/* call to action section style */
+.call-to-action-section {
+	background-color: #ffc107;
+}
+.call-to-action-heading {
+	color: white;
+	font-family: "Open Sans", sans-serif;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+.call-to-action-button {
+	background-color: white;
+}
+.call-to-action-button {
+	margin-top: 80px;
+	margin-bottom: 50px;
+}
+/* call to action section style */
+
+/* Search and filter style */
+.search-filter-location-heading {
+	color: #545454;
+}
+.search-filter-location {
+	font-family: "Open Sans", sans-serif;
+	color: black;
+}
+.search-filter-input {
+	height: 60px;
+}
+.search-filter-input-box {
+	margin: auto;
+}
+.items-grid {
+	margin-top: 100px;
+}
+.item-thumbnail {
+	border-radius: 10px;
+}
+.reward {
+	background-color: #ffc107;
+	color: #f5f4f4;
+	padding-right: 10px;
+	padding-left: 5px;
+	padding-top: 8px;
+	padding-bottom: 0.5px;
+	width: fit-content;
+	z-index: 1;
+	position: relative;
+	top: 50px;
+}
+.found-label {
+	color: #f5f4f4;
+	padding-right: 10px;
+	padding-left: 5px;
+	padding-top: 8px;
+	padding-bottom: 0.5px;
+	width: fit-content;
+	z-index: 1;
+	position: relative;
+	top: 50px;
+}
+.description-holder {
+	padding: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.distance {
+	width: fit-content;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.distance-number {
+	display: inline-block;
 }
+.distance-label {
+	display: inline-block;
+	margin-left: 10px;
+}
+.date-time {
+	margin-right: 20px;
+}
+.distance-date-row {
+	margin-top: -7px;
+}
+/* Search and filter style */

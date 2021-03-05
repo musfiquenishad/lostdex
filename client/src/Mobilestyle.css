@@ -1,0 +1,50 @@
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+	.hero-heading {
+		text-align: center;
+		margin-left: auto;
+	}
+	.sub-hero-card {
+		width: 90%;
+	}
+	.sub-hero-heading {
+		text-align: center;
+	}
+	.sub-hero-brake {
+		display: none;
+	}
+	.sub-hero-image {
+		display: none;
+	}
+	.features-image {
+		margin-top: 50px;
+	}
+	.features-heading {
+		margin-top: 10px;
+	}
+	.features-heading {
+		text-align: center;
+	}
+	.features-sub-heading {
+		text-align: center;
+		width: 100%;
+	}
+	.web-view {
+		display: none;
+	}
+	.call-to-action-button {
+		margin-top: 0px;
+		margin-bottom: 50px;
+	}
+	.search-filter-input-box {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+}
+
+/* Web-view style */
+@media only screen and (min-width: 600px) {
+	.mobile-view {
+		display: none;
+	}
+}
