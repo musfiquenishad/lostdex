@@ -49,7 +49,7 @@ function Navbar() {
 						aria-labelledby="dropdownMenuLink"
 					>
 						<li>
-							<a className="dropdown-item" href="#">
+							<a className="dropdown-item" href="/profile">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									width="16"

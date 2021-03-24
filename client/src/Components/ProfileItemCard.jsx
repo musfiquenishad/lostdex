@@ -1,8 +1,8 @@
 import React from "react";
 
-function ItemCard(props) {
+function ProfileItemCard(props) {
 	return (
-		<div className="col-lg-3 col-md-4 col-sm text-start">
+		<div className="col-lg-4 col-md-4 col-sm text-start">
 			<div className="thumbnail-holder">
 				{props.rewardAmount ? (
 					<div className="reward sticky-top">
@@ -94,4 +94,4 @@ function ItemCard(props) {
 	);
 }
 
-export default ItemCard;
+export default ProfileItemCard;

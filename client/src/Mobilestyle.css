@@ -40,11 +40,37 @@
 		padding-left: 0px;
 		padding-right: 0px;
 	}
+	.desktop-view-item-details {
+		display: none;
+	}
+
+	.item-title {
+		padding: 10px 10px 0px;
+	}
+	.total-listing-label-sort-by {
+		margin-top: 20px;
+		padding: 10px;
+	}
+	.form-signin {
+		margin-top: 130px !important;
+	}
+	.first-name {
+		margin-bottom: 16px;
+	}
+	.form-signup {
+		margin-top: 50px;
+	}
 }
 
 /* Web-view style */
 @media only screen and (min-width: 600px) {
 	.mobile-view {
 		display: none;
+	}
+	.mobile-view-item-details {
+		display: none;
+	}
+	.users-listings {
+		padding-left: 50px;
 	}
 }
