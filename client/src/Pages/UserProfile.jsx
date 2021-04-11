@@ -1,8 +1,8 @@
 import React from "react";
+import ItemCardProfile from "../Components/ItemCardProfile";
 import Navbar from "../Components/Navbar";
 import ProfileItemCard from "../Components/ProfileItemCard";
 import thumbnail from "./../Assets/Images/jaimie-harmsen-8d9jdqyGaQA-unsplash.jpg";
-import ItemCard from "./../Components/ItemCard";
 
 function UserProfile() {
 	return (
@@ -55,12 +55,9 @@ function UserProfile() {
 								<div className="col-6">
 									<h4 className="total-listing-label">5 Listings</h4>
 								</div>
-								<div className="col-6">
-									<select
-										class="form-select"
-										aria-label="Default select example"
-									>
-										<option selected>Sort by</option>
+								<div className="col-6 ">
+									<select className="form-select " aria-label="Default select">
+										<option defaultValue>Sort by</option>
 										<option value="1">New First</option>
 										<option value="2">Old First</option>
 										<option value="3">Nearest First</option>
@@ -69,45 +66,75 @@ function UserProfile() {
 							</div>
 
 							<div className="users-all-listings mt-5">
-								<div class="card mb-3">
-									<div class="row g-0">
-										<div class="col-sm-4">
-											<img width="100%" src={thumbnail} alt="Item Thumbnail" />
-										</div>
-										<div class="col-sm-8">
-											<div class="card-body">
-												<div className="row">
-													<div className="col-10">
-														<h5 className="card-title">Card Title</h5>
-													</div>
-													<div className="col-2 text-end">
-														<button type="button" class=" three-dot-button">
-															<svg
-																xmlns="http://www.w3.org/2000/svg"
-																width="16"
-																height="16"
-																fill="currentColor"
-																class="bi bi-three-dots"
-																viewBox="0 0 16 16"
-															>
-																<path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-															</svg>
-														</button>
-													</div>
-												</div>
+								<ItemCardProfile
+									thumbnail={thumbnail}
+									title="Canadian Passport Lost"
+									category="Passport"
+									description="I lost my canadian Passport while traveling in Bangladesh.
+									 If anyone found this please return it to me"
+									dateTime="02, February, 2021"
+								/>
+								<ItemCardProfile
+									thumbnail={thumbnail}
+									title="Canadian Passport Lost"
+									category="Passport"
+									description="I lost my canadian Passport while traveling in Bangladesh.
+									 If anyone found this please return it to me"
+									dateTime="02, February, 2021"
+								/>
+								<ItemCardProfile
+									thumbnail={thumbnail}
+									title="Canadian Passport Lost"
+									category="Passport"
+									description="I lost my canadian Passport while traveling in Bangladesh.
+									 If anyone found this please return it to me"
+									dateTime="02, February, 2021"
+								/>
+								<ItemCardProfile
+									thumbnail={thumbnail}
+									title="Canadian Passport Lost"
+									category="Passport"
+									description="I lost my canadian Passport while traveling in Bangladesh.
+									 If anyone found this please return it to me"
+									dateTime="02, February, 2021"
+								/>
+							</div>
 
-												<p class="card-text">
-													This is a wider card with supporting text below as a
-													natural lead-in to additional content. This content is
-													a little bit longer.
-												</p>
-												<p class="card-text align-end">
-													<small class="text-muted">02, february, 2021</small>
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
+							<div className="pagination-holder  mt-5">
+								<nav aria-label="Page navigation example">
+									<ul className="pagination justify-content-center">
+										<li className="page-item disabled">
+											<a
+												className="page-link"
+												href="#"
+												tabIndex="-1"
+												aria-disabled="true"
+											>
+												Previous
+											</a>
+										</li>
+										<li className="page-item">
+											<a className="page-link" href="#">
+												1
+											</a>
+										</li>
+										<li className="page-item">
+											<a className="page-link" href="#">
+												2
+											</a>
+										</li>
+										<li className="page-item">
+											<a className="page-link" href="#">
+												3
+											</a>
+										</li>
+										<li className="page-item">
+											<a className="page-link" href="#">
+												Next
+											</a>
+										</li>
+									</ul>
+								</nav>
 							</div>
 						</div>
 					</div>

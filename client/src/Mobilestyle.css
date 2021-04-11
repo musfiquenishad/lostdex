@@ -60,6 +60,11 @@
 	.form-signup {
 		margin-top: 50px;
 	}
+	.preview-image-remove-button {
+		position: relative;
+		left: calc(40% - 15%);
+		top: 21%;
+	}
 }
 
 /* Web-view style */

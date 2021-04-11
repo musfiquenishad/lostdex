@@ -13,7 +13,7 @@
 	color: #545454;
 }
 .menu-dropdown:hover {
-	color: #ffc107;
+	color: #545454;
 }
 
 /*navbar style*/
@@ -161,6 +161,9 @@
 /* Item Details page style */
 .item-category {
 	margin: 10px;
+	margin-bottom: 0px;
+	width: max-content;
+	display: inline-block;
 }
 .item-location {
 	margin: 10px;
@@ -260,7 +263,7 @@ h5.user-name {
 	background-color: white;
 	width: fit-content;
 	height: fit-content;
-	border: none;
+	border-radius: 100%;
 }
 
 /* User Profile page style */
@@ -309,3 +312,24 @@ h5.user-name {
 	margin-top: 50px;
 }
 /* Sign up */
+
+/* Upload Item Page Style */
+
+.preview-image {
+	height: 150px;
+	width: 100%;
+	object-fit: cover;
+	object-position: center center;
+}
+.preview-image-col {
+	margin-top: -32px;
+}
+
+.preview-image-remove-button {
+	border-radius: 50%;
+	position: relative;
+	left: 40%;
+	top: 21%;
+}
+
+/* Upload Item Page Style */

@@ -2,16 +2,18 @@ import React from "react";
 
 function ItemRewardNotice(props) {
 	return (
-		<div class="card contact-card">
-			<div class="card-body">
-				<h4 class="card-title text-center mb-3">{props.RewardAmount + "$"}</h4>
-				<p class="card-text text-center">
+		<div className="card contact-card">
+			<div className="card-body">
+				<h4 className="card-title text-center mb-3">
+					{props.RewardAmount + "$"}
+				</h4>
+				<p className="card-text text-center">
 					{"The person who return this item will be rewarded " +
 						props.RewardAmount +
 						"$"}
 				</p>
-				<div class="d-grid gap-2">
-					<button class="btn btn-warning" type="button">
+				<div className="d-grid gap-2">
+					<button className="btn btn-warning" type="button">
 						Contact Me
 					</button>
 				</div>

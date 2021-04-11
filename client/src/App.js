@@ -9,6 +9,8 @@ import ItemDetails from "./Pages/ItemDetails";
 import UserProfile from "./Pages/UserProfile";
 import SignIn from "./Pages/SignIn";
 import SignUP from "./Pages/SignUP";
+import UploadItem from "./Pages/UploadItem";
+import ManageItem from "./Pages/ManageItem";
 function App() {
 	return (
 		<Router>
@@ -25,6 +27,12 @@ function App() {
 				</Route>
 				<Route exact path="/profile">
 					<UserProfile />
+				</Route>
+				<Route exact path="/upload-item">
+					<UploadItem />
+				</Route>
+				<Route exact path="/manage-item">
+					<ManageItem />
 				</Route>
 				<Route exact path="/signin">
 					<SignIn />

@@ -2,7 +2,7 @@ import React from "react";
 
 function DeskTopPreviewImages(props) {
 	return (
-		<div className="row mt-4 preview-images">
+		<div className="row preview-images">
 			<div className="row">
 				<div className="col-lg-6 mb-4">
 					<img
