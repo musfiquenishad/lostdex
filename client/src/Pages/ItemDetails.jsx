@@ -7,16 +7,20 @@ import ItemTitle from "../Components/ItemTitle";
 import MobilePreviewImages from "../Components/MobilePreviewImages";
 import Navbar from "../Components/Navbar";
 import PublishedBy from "../Components/PublishedBy";
-import PreviewImage1 from "./../Assets/Images/jaimie-harmsen-8d9jdqyGaQA-unsplash.jpg";
+import PreviewImage1 from "./../Assets/Images/Router/P_20210609_230214.jpg";
+import PreviewImage2 from "./../Assets/Images/Router/P_20210609_230329.jpg";
+import PreviewImage3 from "./../Assets/Images/Router/P_20210609_230559.jpg";
+import PreviewImage4 from "./../Assets/Images/Router/P_20210609_230040.jpg";
+import PreviewImage5 from "./../Assets/Images/Router/P_20210609_230050.jpg";
 
 function ItemDetails() {
-	const [categorys] = useState(["Document", "Invoice"]);
+	const [categorys] = useState(["Electronics", "Router"]);
 	return (
 		<div>
 			<Navbar />
 			{/* Desktop View */}
 			<div className="container segment desktop-view-item-details">
-				<ItemTitle ItemTitle="Lorem ipsum dolor sit amet consectetur abc" />
+				<ItemTitle ItemTitle="TP-Link TL-wn727n 150mbps router" />
 				<div className="row  item-category-location">
 					<div className=" col item-category-and-location">
 						<span className="text-muted">
@@ -25,7 +29,7 @@ function ItemDetails() {
 								width="16"
 								height="16"
 								fill="currentColor"
-								className="bi bi-geo-fill"
+								className="bi bi-geo-fill location-icon"
 								viewBox="0 0 16 16"
 							>
 								<path
@@ -38,6 +42,19 @@ function ItemDetails() {
 
 						<nav aria-label="breadcrumb" className="item-category">
 							<ol className="breadcrumb">
+								<li>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="16"
+										height="16"
+										fill="currentColor"
+										className="bi bi-dot"
+										viewBox="0 0 16 16"
+									>
+										<path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+									</svg>
+								</li>
+
 								{categorys.map((category, index) => {
 									return (
 										<li
@@ -53,19 +70,22 @@ function ItemDetails() {
 						</nav>
 					</div>
 				</div>
+
 				<DeskTopPreviewImages
 					PreviewImage1={PreviewImage1}
-					PreviewImage2={PreviewImage1}
-					PreviewImage3={PreviewImage1}
-					PreviewImage4={PreviewImage1}
-					PreviewImage5={PreviewImage1}
+					PreviewImage2={PreviewImage2}
+					PreviewImage3={PreviewImage3}
+					PreviewImage4={PreviewImage4}
+					PreviewImage5={PreviewImage5}
 				/>
 				<div className="row">
 					<div className="col-lg-8 col-md-8">
-						<PublishedBy
-							ProfilePic="https://scontent.fdac116-1.fna.fbcdn.net/v/t1.0-1/p160x160/123674333_1218376621882766_4037199215118466441_o.jpg?_nc_cat=102&ccb=1-3&_nc_sid=7206a8&_nc_ohc=iHGcMaKrjj0AX8H75b1&_nc_ht=scontent.fdac116-1.fna&tp=6&oh=59378c4027312b6618f45a2e7ddf926a&oe=606D362C"
-							DateTime="02, february, 21 at 10 am"
-						/>
+						<div className="table-responsive">
+							<PublishedBy
+								ProfilePic="https://ahsannishad.com/static/media/Avatar.c3eca402.jpg"
+								DateTime="02, february, 21 at 10 am"
+							/>
+						</div>
 						<ItemDescription ItemDescription="Lorem ipsum dolor sit amet consectetur adipiscing, elit venenatis aliquam penatibus felis. Nullam mi cras enim tristique a elementum massa litora habitasse, diam eleifend turpis risus justo rhoncus fames suspendisse, ornare felis nam eu primis dis quisque tempus. Porttitor vestibulum" />
 					</div>
 					<div className="col-lg-4 col-md-4">
@@ -80,23 +100,23 @@ function ItemDetails() {
 			<div className="mobile-view-item-details">
 				<MobilePreviewImages
 					PreviewImage1={PreviewImage1}
-					PreviewImage2={PreviewImage1}
-					PreviewImage3={PreviewImage1}
-					PreviewImage4={PreviewImage1}
-					PreviewImage5={PreviewImage1}
+					PreviewImage2={PreviewImage2}
+					PreviewImage3={PreviewImage3}
+					PreviewImage4={PreviewImage4}
+					PreviewImage5={PreviewImage5}
 				/>
 
 				<div className="container mt-3">
 					<ItemTitle ItemTitle="Lorem ipsum dolor sit amet consectetur abc" />
 					<div className="row  item-category-location">
 						<div className=" col item-category-and-location">
-							<span className="text-muted">
+							<span className="text-muted item-location">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									width="16"
 									height="16"
 									fill="currentColor"
-									className="bi bi-geo-fill"
+									className="bi bi-geo-fill location-icon"
 									viewBox="0 0 16 16"
 								>
 									<path
@@ -124,25 +144,34 @@ function ItemDetails() {
 						</div>
 					</div>
 					<hr />
-					<ItemDescription
-						ItemDescription="Lorem ipsum dolor sit amet consectetur adipiscing, elit 
-				venenatis aliquam penatibus felis. Nullam mi cras enim tristique a elementum massa litora 
-				habitasse, diam eleifend turpis risus justo rhoncus fames suspendisse, ornare felis nam eu 
-				primis dis quisque tempus. Porttitor vestibulum"
-					/>
-					<hr />
-					<PublishedBy
-						ProfilePic="https://scontent.fdac116-1.fna.fbcdn.net/v/t1.0-1/p160x160/123674333_1218376621882766_4037199215118466441_o.jpg?_nc_cat=102&ccb=1-3&_nc_sid=7206a8&_nc_ohc=iHGcMaKrjj0AX8H75b1&_nc_ht=scontent.fdac116-1.fna&tp=6&oh=59378c4027312b6618f45a2e7ddf926a&oe=606D362C"
-						DateTime="02, february, 21 at 10 am"
-					/>
-					<div className="card contact-card">
-						<div className="card-body">
-							<h4 className="card-title text-center mb-3">{"500$"}</h4>
-							<p className="card-text text-center">
-								{"The person who return this item will be rewarded 500$"}
-							</p>
-							<div className="d-grid gap-2">
-								<button className="btn btn-warning" type="button">
+					<div className="table-responsive">
+						<PublishedBy
+							ProfilePic="https://ahsannishad.com/static/media/Avatar.c3eca402.jpg"
+							DateTime="02, february, 21 at 10 am"
+						/>
+					</div>
+
+					<div className="mobile-description-holder">
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipiscing, elit venenatis
+							aliquam penatibus felis. Nullam mi cras enim tristique a elementum
+							massa litora habitasse, diam eleifend turpis risus justo rhoncus
+							fames suspendisse, ornare felis nam eu primis dis quisque tempus.
+							Porttitor vestibulum
+						</p>
+					</div>
+
+					<div className="mobile-contact-card fixed-bottom">
+						<div className="row">
+							<div className="col-5">
+								<h4 className="text-center reward-number">500$</h4>
+								<p className="text-center reward-label">Reward</p>
+							</div>
+							<div className="col-7 contact-button-holder">
+								<button
+									className="btn btn-lg btn-warning contact-button "
+									type="button"
+								>
 									Contact Me
 								</button>
 							</div>

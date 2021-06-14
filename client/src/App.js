@@ -7,10 +7,13 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import SearchAndFilter from "./Pages/SearchAndFilter";
 import ItemDetails from "./Pages/ItemDetails";
 import UserProfile from "./Pages/UserProfile";
+import Profile from "./Pages/Profile";
 import SignIn from "./Pages/SignIn";
 import SignUP from "./Pages/SignUP";
 import UploadItem from "./Pages/UploadItem";
 import ManageItem from "./Pages/ManageItem";
+import LostItems from "./Pages/LostItems";
+import FoundItems from "./Pages/FoundItems";
 function App() {
 	return (
 		<Router>
@@ -27,6 +30,15 @@ function App() {
 				</Route>
 				<Route exact path="/profile">
 					<UserProfile />
+				</Route>
+				<Route exact path="/userprofile">
+					<Profile />
+				</Route>
+				<Route exact path="/lostitems">
+					<LostItems />
+				</Route>
+				<Route exact path="/founditems">
+					<FoundItems />
 				</Route>
 				<Route exact path="/upload-item">
 					<UploadItem />

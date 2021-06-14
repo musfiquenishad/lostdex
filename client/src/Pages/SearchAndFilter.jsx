@@ -1,6 +1,14 @@
 import React, { Fragment } from "react";
 import Navbar from "../Components/Navbar";
-import thumbnail from "./../Assets/Images/jaimie-harmsen-8d9jdqyGaQA-unsplash.jpg";
+import thumbnail1 from "./../Assets/Images/Router/P_20210609_230559.jpg";
+import thumbnail2 from "./../Assets/Images/Router/P_20210609_230329.jpg";
+import thumbnail3 from "./../Assets/Images/Router/P_20210609_230214.jpg";
+import thumbnail4 from "./../Assets/Images/Router/P_20210609_230050.jpg";
+import thumbnail5 from "./../Assets/Images/Router/P_20210609_230040.jpg";
+import thumbnail6 from "./../Assets/Images/Router/P_20210609_230030.jpg";
+import thumbnail7 from "./../Assets/Images/Router/P_20210609_230011.jpg";
+import thumbnail8 from "./../Assets/Images/Router/P_20210609_225948.jpg";
+import thumbnail9 from "./../Assets/Images/Router/P_20210609_230329.jpg";
 import ItemCard from "./../Components/ItemCard";
 
 function SearchAndFilter() {
@@ -48,71 +56,71 @@ function SearchAndFilter() {
 
 				<div className="row items-grid">
 					<ItemCard
-						thumbnail={thumbnail}
+						thumbnail={thumbnail1}
 						title="This will be a small describing title of the item that losts"
-						category="Document-Invoice Paper"
+						category="Electronics / Others"
 						distance="500m"
 						dateTime=" 02, feb, 2021"
 					/>
 					<ItemCard
-						thumbnail={thumbnail}
+						thumbnail={thumbnail2}
 						rewardAmount="500"
 						title="This will be a small describing title of the item that losts"
-						category="Document-Invoice Paper"
+						category="Electronics / Others"
 						distance="500m"
 						dateTime=" 02, feb, 2021"
 					/>
 					<ItemCard
-						thumbnail={thumbnail}
+						thumbnail={thumbnail3}
 						rewardAmount="500"
 						title="This will be a small describing title of the item that losts"
-						category="Document-Invoice Paper"
+						category="Electronics / Others"
 						distance="500m"
 						dateTime=" 02, feb, 2021"
 					/>
 					<ItemCard
-						thumbnail={thumbnail}
+						thumbnail={thumbnail4}
 						title="This will be a small describing title of the item that losts"
-						category="Document-Invoice Paper"
+						category="Electronics / Others"
 						distance="500m"
 						dateTime=" 02, feb, 2021"
 					/>
 					<ItemCard
-						thumbnail={thumbnail}
+						thumbnail={thumbnail5}
 						rewardAmount="500"
 						title="This will be a small describing title of the item that losts"
-						category="Document-Invoice Paper"
+						category="Electronics / Others"
 						distance="500m"
 						dateTime=" 02, feb, 2021"
 					/>
 					<ItemCard
-						thumbnail={thumbnail}
+						thumbnail={thumbnail6}
 						rewardAmount="500"
 						title="This will be a small describing title of the item that losts"
-						category="Document-Invoice Paper"
+						category="Electronics / Others"
 						distance="500m"
 						dateTime=" 02, feb, 2021"
 					/>
 					<ItemCard
-						thumbnail={thumbnail}
+						thumbnail={thumbnail7}
 						rewardAmount="500"
 						title="This will be a small describing title of the item that losts"
-						category="Document-Invoice Paper"
+						category="Electronics / Others"
 						distance="500m"
 						dateTime=" 02, feb, 2021"
 					/>
 					<ItemCard
-						thumbnail={thumbnail}
+						thumbnail={thumbnail8}
 						title="This will be a small describing title of the item that losts"
-						category="Document-Invoice Paper"
+						category="Electronics / Others"
 						distance="500m"
 						dateTime=" 02, feb, 2021"
 					/>
 					<ItemCard
-						thumbnail={thumbnail}
+						thumbnail={thumbnail9}
 						rewardAmount="500"
 						title="This will be a small describing title of the item that losts"
-						category="Document-Invoice Paper"
+						category="Electronics / Others"
 						distance="500m"
 						dateTime=" 02, feb, 2021"
 					/>

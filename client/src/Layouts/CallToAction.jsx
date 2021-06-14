@@ -13,12 +13,13 @@ function CallToAction() {
 						</h1>
 					</div>
 					<div className="col-lg-4 col-md-4 col-sm text-center">
-						<button
+						<a
+							href="/signup"
 							type="button"
 							className="btn btn-lg btn-light call-to-action-button"
 						>
 							Get Started
-						</button>
+						</a>
 					</div>
 				</div>
 			</div>

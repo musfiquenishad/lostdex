@@ -2,50 +2,46 @@ import React from "react";
 
 function DeskTopPreviewImages(props) {
 	return (
-		<div className="row preview-images">
-			<div className="row">
-				<div className="col-lg-6 mb-4">
+		<div className="row preview-images mt-2 mb-4">
+			<div className="row padding-left padding-right preview-row">
+				<div className="col padding-right">
 					<img
-						className="item-preview-image border-radius-start"
-						width="100%"
 						src={props.PreviewImage1}
-						alt=""
+						className="details-preview-image border-radius-start preview-image-main"
+						alt="Preview Image"
 					/>
 				</div>
-				<div className="col-lg-6">
-					<div className="row mb-4">
-						<div className="col">
+				<div className="col padding-left">
+					<div className="row">
+						<div className="col padding-right padding-bottom">
 							<img
-								className="item-preview-image "
-								width="100%"
 								src={props.PreviewImage2}
-								alt=""
+								className="details-preview-image  preview-image-sub"
+								alt="Preview Image"
 							/>
 						</div>
-						<div className="col">
+						<div className="col padding-left padding-bottom">
 							<img
-								className="item-preview-image border-radius-top-end"
-								width="100%"
 								src={props.PreviewImage3}
-								alt=""
+								className="details-preview-image border-radius-top-end preview-image-sub"
+								alt="Preview Image"
 							/>
 						</div>
 					</div>
-					<div className="row mb-4">
-						<div className="col">
+
+					<div className="row">
+						<div className="col padding-right">
 							<img
-								className="item-preview-image"
-								width="100%"
 								src={props.PreviewImage4}
-								alt=""
+								className="details-preview-image  preview-image-sub"
+								alt="Preview Image"
 							/>
 						</div>
-						<div className="col">
+						<div className="col padding-left">
 							<img
-								className="item-preview-image border-radius-bottom-end"
-								width="100%"
 								src={props.PreviewImage5}
-								alt=""
+								className="details-preview-image border-radius-bottom-end preview-image-sub"
+								alt="Preview Image"
 							/>
 						</div>
 					</div>

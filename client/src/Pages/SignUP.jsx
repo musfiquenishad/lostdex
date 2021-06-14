@@ -78,9 +78,13 @@ function SignUP() {
 								/>
 							</div>
 						</div>
-						<button className="w-100 btn btn-lg btn-warning" type="submit">
+						<a
+							href="/signin"
+							className="w-100 btn btn-lg btn-warning"
+							type="submit"
+						>
 							Sign Up
-						</button>
+						</a>
 					</div>
 
 					<p className="mt-3 mb-3 text-muted text-center">

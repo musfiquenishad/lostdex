@@ -1,5 +1,8 @@
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+	.desktop-view {
+		display: none;
+	}
 	.hero-heading {
 		text-align: center;
 		margin-left: auto;
@@ -61,9 +64,32 @@
 		margin-top: 50px;
 	}
 	.preview-image-remove-button {
+		border-radius: 100%;
 		position: relative;
-		left: calc(40% - 15%);
+		height: 32px;
+		width: 32px;
+		left: 55%;
 		top: 21%;
+	}
+	.manage-item-preview-image-col {
+		display: none;
+	}
+	.manage-item-holder {
+		margin: 50px 0px 0px 0px;
+		padding: 40px 5px 40px 5px;
+	}
+	.lost-item-input-label {
+		width: 95%;
+	}
+	.found-item-input-label {
+		width: 95%;
+	}
+	.user-profile-holder {
+		padding: 20px 20px 0px 20px;
+		margin: 1% 1% 0px 1%;
+	}
+	.user-name-holder {
+		margin-top: 0px;
 	}
 }
 
@@ -77,5 +103,11 @@
 	}
 	.users-listings {
 		padding-left: 50px;
+	}
+	.preview-image-remove-button {
+		border-radius: 100%;
+		position: relative;
+		left: 82%;
+		top: 21%;
 	}
 }

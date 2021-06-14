@@ -2,13 +2,13 @@ import React from "react";
 
 function PublishedBy(props) {
 	return (
-		<div className="profile-info">
+		<div className="profile-info ">
 			<div className="profile-picture-holder">
 				<img
 					className="profile-pic"
 					width="50px"
 					height="50px"
-					src={props.ProfilePic}
+					src="https://ahsannishad.com/static/media/Avatar.c3eca402.jpg"
 					alt="Profile-picture"
 				/>
 			</div>

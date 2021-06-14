@@ -37,9 +37,13 @@ function Signin() {
 							<input type="checkbox" value="remember-me" /> Remember me
 						</label>
 					</div>
-					<button className="w-100 btn btn-lg btn-warning" type="submit">
+					<a
+						href="/manage-item"
+						className="w-100 btn btn-lg btn-warning"
+						type="submit"
+					>
 						Sign in
-					</button>
+					</a>
 					<p className="mt-3 mb-3 text-muted text-center">
 						Don't have an account? <a href="/signup">Sign Up</a>
 					</p>

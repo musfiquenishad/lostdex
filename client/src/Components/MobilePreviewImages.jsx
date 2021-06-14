@@ -12,35 +12,35 @@ function MobilePreviewImages(props) {
 					<div className="carousel-item active">
 						<img
 							src={props.PreviewImage1}
-							className="d-block w-100"
+							className="d-block w-100 mobile-view-Preview-image"
 							alt="Item Pictures"
 						/>
 					</div>
 					<div className="carousel-item">
 						<img
 							src={props.PreviewImage2}
-							className="d-block w-100"
+							className="d-block w-100 mobile-view-Preview-image"
 							alt="Item Pictures"
 						/>
 					</div>
 					<div className="carousel-item">
 						<img
 							src={props.PreviewImage3}
-							className="d-block w-100"
+							className="d-block w-100 mobile-view-Preview-image"
 							alt="Item Pictures"
 						/>
 					</div>
 					<div className="carousel-item">
 						<img
 							src={props.PreviewImage4}
-							className="d-block w-100"
+							className="d-block w-100 mobile-view-Preview-image"
 							alt="Item Pictures"
 						/>
 					</div>
 					<div className="carousel-item">
 						<img
 							src={props.PreviewImage5}
-							className="d-block w-100"
+							className="d-block w-100 mobile-view-Preview-image"
 							alt="Item Pictures"
 						/>
 					</div>

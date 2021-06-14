@@ -1,11 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Navbar from "../Components/Navbar";
-
 import thumbnail from "./../Assets/Images/jaimie-harmsen-8d9jdqyGaQA-unsplash.jpg";
 import ItemCard from "./../Components/ItemCard";
 
-function UserProfile() {
+function LostItems() {
 	return (
 		<div>
 			<Navbar />
@@ -118,35 +117,21 @@ function UserProfile() {
 					<div className="row">
 						<ItemCard
 							thumbnail={thumbnail}
+							rewardAmount="500"
+							title="This will be a small describing title of the item that losts"
+							category="Document, Invoice Paper"
+							distance="500m"
+							dateTime=" 02, feb, 2021"
+						/>
+						<ItemCard
+							thumbnail={thumbnail}
+							rewardAmount="500"
 							title="This will be a small describing title of the item that losts"
 							category="Document, Invoice Paper"
 							distance="500m"
 							dateTime=" 02, feb, 2021"
 						/>
 
-						<ItemCard
-							thumbnail={thumbnail}
-							rewardAmount="500"
-							title="This will be a small describing title of the item that losts"
-							category="Document, Invoice Paper"
-							distance="500m"
-							dateTime=" 02, feb, 2021"
-						/>
-						<ItemCard
-							thumbnail={thumbnail}
-							rewardAmount="500"
-							title="This will be a small describing title of the item that losts"
-							category="Document, Invoice Paper"
-							distance="500m"
-							dateTime=" 02, feb, 2021"
-						/>
-						<ItemCard
-							thumbnail={thumbnail}
-							title="This will be a small describing title of the item that losts"
-							category="Document, Invoice Paper"
-							distance="500m"
-							dateTime=" 02, feb, 2021"
-						/>
 						<ItemCard
 							thumbnail={thumbnail}
 							rewardAmount="500"
@@ -162,4 +147,4 @@ function UserProfile() {
 	);
 }
 
-export default UserProfile;
+export default LostItems;

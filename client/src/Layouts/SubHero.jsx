@@ -24,7 +24,7 @@ function SubHero() {
 									rest. From organizing your lost notice to finding the items
 								</p>
 								<div className="text-end">
-									<a href="#" className="btn btn-warning">
+									<a href="/signup" className="btn btn-warning">
 										Get Started
 									</a>
 								</div>
