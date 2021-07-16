@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
+const sharp = require("sharp");
+
 require("dotenv").config();
 const path = require("path");
 const Schema = mongoose.Schema;
@@ -207,16 +209,7 @@ app.get("/api/users/listings/:username", (req, res) => {
 //.....................................Edit user information.......................................//
 //...............................Multer file upload config.....................................//
 const upload = multer({
-	dest: "images",
 	limits: { fileSize: 5000000 },
-	storage: multer.diskStorage({
-		destination: (req, file, cb) => {
-			cb(null, "uploads/images");
-		},
-		filename: (req, file, cb) => {
-			cb(null, file.originalname);
-		},
-	}),
 	fileFilter(req, file, cb) {
 		if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
 			return cb(new Error("File must be a PNG/JPG/JPEG image"));
@@ -229,6 +222,52 @@ app.post(
 	"/api/users/uploadprofilepicture",
 	isAuthorized,
 	upload.single("profilePicture"),
+	async (req, res) => {
+		await sharp(req.file.buffer)
+			.resize(200, 200)
+			.toFile(`./uploads/images/${req.file.originalname}`);
+
+		if (req.headers.authorization) {
+			const token = req.headers.authorization.split(" ")[1];
+			if (!token) {
+				res.status(404).json({
+					error: "User not found with that user id",
+				});
+			} else {
+				let decoded = jwt.verify(token, process.env.JWT_KEY);
+				User.findByIdAndUpdate(
+					{ _id: decoded.userId },
+					{
+						profilePicture: `uploads/images/${req.file.originalname}`,
+					},
+					(error, user) => {
+						if (error) {
+							res.status(500).json({
+								msg: "Something went wrong while updating user information",
+							});
+						} else if (!user) {
+							res.status(404).json({
+								msg: "User doesn't exist in our database wrong authorization token",
+							});
+						} else {
+							res
+								.status(201)
+								.json({ msg: "User's Profile picture updated successfully" });
+						}
+					}
+				);
+			}
+		}
+	},
+	(error, req, res, next) => {
+		res.status(400).json({ error: error.message });
+	}
+);
+
+app.put(
+	"/api/users/updateuserinformation",
+	isAuthorized,
+
 	(req, res) => {
 		if (req.headers.authorization) {
 			const token = req.headers.authorization.split(" ")[1];
@@ -241,12 +280,17 @@ app.post(
 				User.findByIdAndUpdate(
 					{ _id: decoded.userId },
 					{
-						profilePicture: req.file.path,
+						firstname: req.body.firstname,
+						lastname: req.body.lastname,
 					},
-					(error, success) => {
+					(error, user) => {
 						if (error) {
 							res.status(500).json({
 								msg: "Something went wrong while updating user information",
+							});
+						} else if (!user) {
+							res.status(404).json({
+								msg: "User doesn't exist in our database. Wrong authorization key",
 							});
 						} else
 							res
@@ -256,34 +300,6 @@ app.post(
 				);
 			}
 		}
-	},
-	(error, req, res, next) => {
-		res.status(400).json({ error: error.message });
-	}
-);
-
-app.put(
-	"/api/users/:userid",
-	isAuthorized,
-
-	(req, res) => {
-		User.findByIdAndUpdate(
-			{ _id: req.params.userid },
-			{
-				firstname: req.body.firstname,
-				lastname: req.body.lastname,
-			},
-			(error, success) => {
-				if (error) {
-					res.status(500).json({
-						msg: "Something went wrong while updating user information",
-					});
-				} else
-					res
-						.status(201)
-						.json({ msg: "User's information updated successfully" });
-			}
-		);
 	}
 );
 
@@ -307,54 +323,92 @@ const listingsSchema = new Schema(
 
 const Listings = new mongoose.model("Listings", listingsSchema);
 
-app.post("/api/listings/listitem", isAuthorized, async (req, res) => {
-	const { userId, email } = jwt.verify(
-		req.headers.authorization.split(" ")[1],
-		process.env.JWT_KEY
-	);
-	User.findOne({ _id: userId }, (error, user) => {
-		if (error) {
-			res.status(500).json({ msg: error.message });
-		} else if (!user) {
-			res.status(404).json({ msg: "User not found" });
-		}
-	});
-	const {
-		location,
-		title,
-		category,
-		description,
-		reward,
-		itemType,
-		previewImages,
-	} = req.body;
+app.post(
+	"/api/listings/listitem",
+	isAuthorized,
+	upload.array("images", 6),
+	async (req, res) => {
+		const previewImages = [];
+		await req.files.forEach((image, index) => {
+			sharp(image.buffer)
+				.resize(200, 200)
+				.toFile(`./uploads/images/${image.originalname}`);
+			previewImages.push(`uploads/images/${image.originalname}`);
+		});
 
-	const listing = new Listings({
-		location,
-		title,
-		category,
-		description,
-		reward,
-		itemType,
-		previewImages,
-		author: userId,
-	});
+		const { userId, email } = jwt.verify(
+			req.headers.authorization.split(" ")[1],
+			process.env.JWT_KEY
+		);
+		User.findOne({ _id: userId }, (error, user) => {
+			if (error) {
+				res.status(500).json({ msg: error.message });
+			} else if (!user) {
+				res.status(404).json({ msg: "User not found" });
+			}
+		});
+		const { location, title, category, description, reward, itemType } =
+			req.body;
 
-	listing.save((error, success) => {
-		if (error) {
-			res.status(500).json({ msg: error.message });
-		} else {
-			User.findOneAndUpdate(
-				{ _id: userId },
-				{ $addToSet: { listings: success.id } },
-				(error, user) => {
-					if (error) {
-						res.status(500).json({ msg: error.message });
-					} else {
-						res.status(201).json({ mgs: "Item listed successfully" });
+		const listing = new Listings({
+			location,
+			title,
+			category,
+			description,
+			reward,
+			itemType,
+			previewImages,
+			author: userId,
+		});
+
+		listing.save((error, success) => {
+			if (error) {
+				res.status(500).json({ msg: error.message });
+			} else {
+				User.findOneAndUpdate(
+					{ _id: userId },
+					{ $addToSet: { listings: success.id } },
+					(error, user) => {
+						if (error) {
+							res.status(500).json({ msg: error.message });
+						} else {
+							res.status(201).json({ mgs: "Item listed successfully" });
+						}
 					}
-				}
-			);
+				);
+			}
+		});
+	}
+);
+
+app.put("/api/listings/edit/:id", (req, res) => {
+	const item = req.body;
+	Listings.findOneAndUpdate(
+		{ _id: req.params.id },
+		{
+			location: req.body.location,
+			title: req.body.title,
+			category: req.body.category,
+			description: req.body.description,
+			reward: req.body.reward,
+			itemType: req.body.itemType,
+		},
+		(error, listing) => {
+			if (error) {
+				res.status(500).json({ msg: error.message });
+			} else {
+				res.json({ msg: "Item updated succesfully" });
+			}
+		}
+	);
+});
+
+app.delete("/api/listings/delete/:id", (req, res) => {
+	Listings.findByIdAndDelete({ _id: req.params.id }, (error, success) => {
+		if (error) {
+			res.status(500).json({ msg: error.message });
+		} else if (success) {
+			res.send("Successfully deleted the item");
 		}
 	});
 });
