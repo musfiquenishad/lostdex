@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const sharp = require("sharp");
+const _ = require("lodash");
 
 require("dotenv").config();
 const path = require("path");
@@ -79,14 +80,15 @@ app.post("/api/users/signup", async (req, res) => {
 	try {
 		hashedPassword = await bcrypt.hash(password, 10);
 	} catch (error) {
-		console.log(error);
+		res.status(500);
+		return;
 	}
 
 	User.findOne({ email }, (error, user) => {
 		if (error) {
 			console.log(error);
 		} else if (user) {
-			res.send("User already exist with that email address");
+			res.status().json({ msg: "User already exist with that email address" });
 		} else {
 			const user = new User({
 				username,
@@ -109,7 +111,11 @@ app.post("/api/users/signup", async (req, res) => {
 						}
 					);
 
-					res.json({ msg: "User successfully signed up", token });
+					res.status(201).json({
+						authorized: true,
+						msg: "User successfully signed up",
+						token,
+					});
 				})
 				.catch((error) => {
 					res.status(500).send(error.message);
@@ -139,38 +145,62 @@ app.post("/api/users/signin", (req, res) => {
 						}
 					);
 
-					res.json({ msg: "User SignedIn successfully", token });
+					res.json({
+						authorized: true,
+						msg: "User SignedIn successfully",
+						token,
+					});
 				} else if (!success) {
-					res.send("Incorrect credantials");
+					res
+						.status(401)
+						.json({ authorized: false, msg: "Incorrect credantials" });
 				}
 			});
 		} else {
-			res.send("Incorrect email address");
+			res
+				.status(401)
+				.json({ authorized: false, msg: "Incorrect email address" });
 		}
 	});
 });
 //..................................User SignUp, SignIn Section Ends..............................//
 //...................................Check if user name is exists or not..........................//
 app.post("/api/users", (req, res) => {
-	console.log(req.query);
 	User.findOne({ username: req.query.username }, (error, user) => {
 		if (error) {
 			res.status(500).send(error);
 		} else if (user) {
 			res.json({
-				availability: false,
+				available: false,
 				msg: "User name is unavailable, Please use another username",
 			});
 		} else {
 			res.json({
-				availability: true,
+				available: true,
 				msg: "User name is available you can use this username",
 			});
 		}
 	});
 });
 //.........................................Check username availability ends.......................//
-
+//.........................................Check email availability .......................//
+app.post("/api/email", (req, res) => {
+	User.findOne({ email: req.query.email }, (error, user) => {
+		if (error) {
+			res.status(500).send(error);
+		} else if (user) {
+			res.json({
+				available: false,
+				msg: "An user is already registered with that email address please use another one",
+			});
+		} else {
+			res.json({
+				available: true,
+				msg: "email is available you can use this email",
+			});
+		}
+	});
+});
 //....................................Get user by username........................................//
 app.get("/api/users/:username", (req, res) => {
 	User.findOne({ username: req.params.username }, (error, user) => {
@@ -206,6 +236,7 @@ app.get("/api/users/listings/:username", (req, res) => {
 		});
 });
 //..................................Get Listings by username Ends..................................//
+
 //.....................................Edit user information.......................................//
 //...............................Multer file upload config.....................................//
 const upload = multer({
@@ -304,6 +335,20 @@ app.put(
 );
 
 //...............................Get Individual Listings by Listing title..........................//
+app.get("/api/listings", (req, res) => {
+	let link = _.kebabCase(req.query.search);
+	Listings.findOne({ permalink: link }, (error, listing) => {
+		if (error) {
+			res.status(500).json({ msg: "Something went wrong while searching" });
+		} else if (listing) {
+			res.send(listing);
+		} else {
+			res
+				.status(404)
+				.json({ msg: "What you are looking for could not be found" });
+		}
+	});
+});
 //............................Get Individual Listings by Listing title Ends........................//
 
 //...................................Listings Schema...............................................//
@@ -315,6 +360,7 @@ const listingsSchema = new Schema(
 		description: { type: String, required: true },
 		reward: { type: String },
 		itemType: { type: String, required: true },
+		permalink: { type: String, required: true },
 		previewImages: { type: Array, required: true },
 		author: { type: Schema.Types.ObjectId, ref: "User", required: true },
 	},
@@ -357,6 +403,7 @@ app.post(
 			description,
 			reward,
 			itemType,
+			permalink: _.kebabCase(title),
 			previewImages,
 			author: userId,
 		});
@@ -381,8 +428,7 @@ app.post(
 	}
 );
 
-app.put("/api/listings/edit/:id", (req, res) => {
-	const item = req.body;
+app.put("/api/listings/edit/:id", isAuthorized, (req, res) => {
 	Listings.findOneAndUpdate(
 		{ _id: req.params.id },
 		{
@@ -391,6 +437,7 @@ app.put("/api/listings/edit/:id", (req, res) => {
 			category: req.body.category,
 			description: req.body.description,
 			reward: req.body.reward,
+			permalink: _.kebabCase(title),
 			itemType: req.body.itemType,
 		},
 		(error, listing) => {
@@ -403,14 +450,24 @@ app.put("/api/listings/edit/:id", (req, res) => {
 	);
 });
 
-app.delete("/api/listings/delete/:id", (req, res) => {
-	Listings.findByIdAndDelete({ _id: req.params.id }, (error, success) => {
-		if (error) {
-			res.status(500).json({ msg: error.message });
-		} else if (success) {
-			res.send("Successfully deleted the item");
-		}
-	});
+app.delete("/api/listings/delete/:id", isAuthorized, (req, res) => {
+	const { userId, email } = jwt.verify(
+		req.headers.authorization.split(" ")[1],
+		process.env.JWT_KEY
+	);
+	User.findOneAndUpdate({ _id: userId }, { $pull: { listings: req.params.id } })
+		.then((user) => {
+			Listings.findByIdAndDelete({ _id: req.params.id }, (error, success) => {
+				if (error) {
+					res.status(500).json({ msg: error.message });
+				} else if (success) {
+					res.send("Successfully deleted the item");
+				}
+			});
+		})
+		.catch((error) => {
+			res.status(500).json({ msg: "Something went wrong while deleting" });
+		});
 });
 
 //........................................server starts............................................//

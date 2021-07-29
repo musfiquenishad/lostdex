@@ -2,6 +2,11 @@ import React, { Fragment, useState } from "react";
 import Navbar from "./../Components/Navbar";
 import thumbnail from "./../Assets/Images/jaimie-harmsen-8d9jdqyGaQA-unsplash.jpg";
 import Pagination from "./../Components/Pagination";
+import PlacesAutocomplete, {
+	geocodeByAddress,
+	geocodeByPlaceId,
+	getLatLng,
+} from "react-places-autocomplete";
 
 function ManageItem() {
 	const [images, setImages] = useState([]);
@@ -9,7 +14,11 @@ function ManageItem() {
 	const [subCategory, setSubCategory] = useState([]);
 	const [showSubCategory, setShowSubCategory] = useState(false);
 	const [step, setStep] = useState(1);
-
+	const [address, setAddress] = useState("");
+	const [coordinates, setCoordinates] = React.useState({
+		lat: null,
+		lng: null,
+	});
 	function handleChange(event) {
 		if (event.target.files) {
 			const imagesArray = Array.from(event.target.files).map((image) =>
@@ -23,6 +32,12 @@ function ManageItem() {
 			);
 		}
 	}
+	const handleSelect = async (value) => {
+		const results = await geocodeByAddress(value);
+		const latLng = await getLatLng(results[0]);
+		setAddress(value);
+		setCoordinates(latLng);
+	};
 
 	async function removeImage(index) {
 		images.splice(index, 1);
@@ -62,6 +77,135 @@ function ManageItem() {
 			);
 		});
 	};
+
+	function selectCategory(event) {
+		if (event.target.value === "Humans") {
+			setSubCategory([
+				"Children(1-12 Years)",
+				"Teen (13-19 Years)",
+				"Adult (20-40 Years) ",
+				"Old (Over 41 Years)",
+			]);
+
+			setShowSubCategory(true);
+		} else if (event.target.value === "Documents") {
+			setSubCategory([
+				"Deed Papers",
+				"Invoice Paper",
+				"Banking Documents",
+				"Bank Checks",
+				"Tickets",
+				"Note Book",
+				"Magazine",
+				"Others",
+			]);
+
+			setShowSubCategory(true);
+		} else if (event.target.value === "Electronics") {
+			setSubCategory([
+				"Laptop",
+				"Tab",
+				"Camera",
+				"Computer Accessories",
+				"Headphone, Buds, Accessories",
+				"Adapter",
+				"Remote",
+				"Smart Watch",
+				"Others",
+			]);
+
+			setShowSubCategory(true);
+		} else if (event.target.value === "Mobile & Accessories") {
+			setSubCategory([
+				"Smartphone",
+				"Feature Phone",
+				"Power Bank",
+				"Charger",
+				"Others",
+			]);
+
+			setShowSubCategory(true);
+		} else if (event.target.value === "Certificates") {
+			setSubCategory([
+				"School/College Certificates",
+				"Board Certificates",
+				"Birth Certificates",
+				"Dead Certificates",
+				"Testimonial Certificates",
+				"Others",
+			]);
+			setShowSubCategory(true);
+		} else if (event.target.value === "Id Cards") {
+			setSubCategory([
+				"Id Cards",
+				"National Id Card",
+				"School/College/University Id Card",
+				"Others",
+			]);
+			setShowSubCategory(true);
+		} else if (event.target.value === "Bags") {
+			setSubCategory([
+				"Bags",
+				"Purse",
+				"Money Bag",
+				"Gym Bag",
+				"School Bag",
+				"Office Bag",
+				"Grocery Bag",
+				"Belt Bag",
+				"Camera Bag",
+				"Laptop Bag",
+				"Others",
+			]);
+			setShowSubCategory(true);
+		} else if (event.target.value === "Keys") {
+			setSubCategory([
+				"Home Key",
+				"Vehicles Key",
+				"Office Key",
+				"Store Key",
+				"Others",
+			]);
+			setShowSubCategory(true);
+		} else if (event.target.value === "License") {
+			setSubCategory(["Driving License", "Trade License", "Others"]);
+			setShowSubCategory(true);
+		} else if (event.target.value === "Vehicles") {
+			setSubCategory(["Car", "Van", "Motor Bike", "Bicycle", "Pickup Van"]);
+			setShowSubCategory(true);
+		} else if (event.target.value === "Passport & Visa") {
+			setSubCategory(["Passport", "Nationality Card (Green Card)", "Others"]);
+			setShowSubCategory(true);
+		} else if (event.target.value === "Pets & Animals") {
+			setSubCategory(["Birds", "Cats", "Dogs", "Rabbits", "Others"]);
+			setShowSubCategory(true);
+		} else if (event.target.value === "Fashion & Beauty") {
+			setSubCategory([
+				"Wrist Band",
+				"Shoe",
+				"Bracelet",
+				"Ring",
+				"Necklace",
+				"Others",
+			]);
+			setShowSubCategory(true);
+		} else if (event.target.value === "Sports & Hobbies") {
+			setSubCategory([
+				"Guitar",
+				"Cricket Bat",
+				"Cricket Ball",
+				"Badminton Bat",
+				"Tennis Bat",
+				"Tennis Ball",
+				"Hand Glub",
+				"Others",
+			]);
+			setShowSubCategory(true);
+		} else if (event.target.value === "Book & Stationary") {
+			setSubCategory(["Book", "Notebook", "Stationary", "Diary", "Others"]);
+			setShowSubCategory(true);
+		}
+	}
 
 	return (
 		<Fragment>
@@ -577,14 +721,61 @@ function ManageItem() {
 													</div>
 												</div>
 											</div>
-
+											{/* REVIEW */}
 											<div className="form mt-3">
-												<input
-													className="form-control form-control-lg mb-3"
-													type="text"
-													placeholder="Choose location"
-													aria-label="Choose Location"
-												/>
+												<PlacesAutocomplete
+													value={address}
+													onChange={setAddress}
+													onSelect={handleSelect}
+												>
+													{({
+														getInputProps,
+														suggestions,
+														getSuggestionItemProps,
+														loading,
+													}) => (
+														<div>
+															<input
+																className="form-control form-control-lg mb-3"
+																{...getInputProps({
+																	placeholder: "Type address",
+																})}
+															/>
+
+															<div>
+																{loading ? (
+																	<div className="mb-3">
+																		<span
+																			className="spinner-grow spinner-grow-sm"
+																			role="status"
+																			aria-hidden="true"
+																		></span>{" "}
+																		<span>Loading...</span>
+																	</div>
+																) : null}
+
+																{suggestions.map((suggestion) => {
+																	const style = {
+																		backgroundColor: suggestion.active
+																			? "#41b6e6"
+																			: "#fff",
+																	};
+
+																	return (
+																		<div
+																			{...getSuggestionItemProps(suggestion, {
+																				style,
+																			})}
+																		>
+																			{suggestion.description}
+																		</div>
+																	);
+																})}
+															</div>
+														</div>
+													)}
+												</PlacesAutocomplete>
+
 												<input
 													className="form-control form-control-lg  mb-3"
 													type="text"
@@ -598,165 +789,7 @@ function ManageItem() {
 														<select
 															className="form-select form-select-lg mb-3"
 															aria-label=".form-select-lg example"
-															onChange={(event) => {
-																if (event.target.value === "Humans") {
-																	setSubCategory([
-																		"Children(1-12 Years)",
-																		"Teen (13-19 Years)",
-																		"Adult (20-40 Years) ",
-																		"Old (Over 41 Years)",
-																	]);
-
-																	setShowSubCategory(true);
-																} else if (event.target.value === "Documents") {
-																	setSubCategory([
-																		"Deed Papers",
-																		"Invoice Paper",
-																		"Banking Documents",
-																		"Bank Checks",
-																		"Tickets",
-																		"Note Book",
-																		"Magazine",
-																		"Others",
-																	]);
-
-																	setShowSubCategory(true);
-																} else if (
-																	event.target.value === "Electronics"
-																) {
-																	setSubCategory([
-																		"Laptop",
-																		"Tab",
-																		"Camera",
-																		"Computer Accessories",
-																		"Headphone, Buds, Accessories",
-																		"Adapter",
-																		"Remote",
-																		"Smart Watch",
-																		"Others",
-																	]);
-
-																	setShowSubCategory(true);
-																} else if (
-																	event.target.value === "Mobile & Accessories"
-																) {
-																	setSubCategory([
-																		"Smartphone",
-																		"Feature Phone",
-																		"Power Bank",
-																		"Charger",
-																		"Others",
-																	]);
-
-																	setShowSubCategory(true);
-																} else if (
-																	event.target.value === "Certificates"
-																) {
-																	setSubCategory([
-																		"School/College Certificates",
-																		"Board Certificates",
-																		"Birth Certificates",
-																		"Dead Certificates",
-																		"Testimonial Certificates",
-																		"Others",
-																	]);
-																} else if (event.target.value === "Id Cards") {
-																	setSubCategory([
-																		"Id Cards",
-																		"National Id Card",
-																		"School/College/University Id Card",
-																		"Others",
-																	]);
-																} else if (event.target.value === "Bags") {
-																	setSubCategory([
-																		"Bags",
-																		"Purse",
-																		"Money Bag",
-																		"Gym Bag",
-																		"School Bag",
-																		"Office Bag",
-																		"Grocery Bag",
-																		"Belt Bag",
-																		"Camera Bag",
-																		"Laptop Bag",
-																		"Others",
-																	]);
-																} else if (event.target.value === "Keys") {
-																	setSubCategory([
-																		"Home Key",
-																		"Vehicles Key",
-																		"Office Key",
-																		"Store Key",
-																		"Others",
-																	]);
-																} else if (event.target.value === "License") {
-																	setSubCategory([
-																		"Driving License",
-																		"Trade License",
-																		"Others",
-																	]);
-																} else if (event.target.value === "Vehicles") {
-																	setSubCategory([
-																		"Car",
-																		"Van",
-																		"Motor Bike",
-																		"Bicycle",
-																		"Pickup Van",
-																	]);
-																} else if (
-																	event.target.value === "Passport & Visa"
-																) {
-																	setSubCategory([
-																		"Passport",
-																		"Nationality Card (Green Card)",
-																		"Others",
-																	]);
-																} else if (
-																	event.target.value === "Pets & Animals"
-																) {
-																	setSubCategory([
-																		"Birds",
-																		"Cats",
-																		"Dogs",
-																		"Rabbits",
-																		"Others",
-																	]);
-																} else if (
-																	event.target.value === "Fashion & Beauty"
-																) {
-																	setSubCategory([
-																		"Wrist Band",
-																		"Shoe",
-																		"Bracelet",
-																		"Ring",
-																		"Necklace",
-																		"Others",
-																	]);
-																} else if (
-																	event.target.value === "Sports & Hobbies"
-																) {
-																	setSubCategory([
-																		"Guitar",
-																		"Cricket Bat",
-																		"Cricket Ball",
-																		"Badminton Bat",
-																		"Tennis Bat",
-																		"Tennis Ball",
-																		"Hand Glub",
-																		"Others",
-																	]);
-																} else if (
-																	event.target.value === "Book & Stationary"
-																) {
-																	setSubCategory([
-																		"Book",
-																		"Notebook",
-																		"Stationary",
-																		"Diary",
-																		"Others",
-																	]);
-																}
-															}}
+															onChange={selectCategory}
 														>
 															<option value="">Choose category</option>
 															<option value="Humans">Humans</option>
